@@ -1,0 +1,43 @@
+- name: Configure telemetry on coin target
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Install auditd
+      ansible.builtin.package:
+        name: audit
+        state: present
+
+    - name: Create SEC598 audit rules
+      ansible.builtin.copy:
+        dest: /etc/audit/rules.d/sec598.rules
+        owner: root
+        group: root
+        mode: "0640"
+        content: |
+          ## SEC598 coin validation telemetry
+
+          # Record process execution
+          -a always,exit -F arch=b64 -S execve -k sec598_exec
+
+          # Watch systemd unit creation/modification
+          -w /etc/systemd/system/ -p wa -k sec598_systemd
+          -w /usr/lib/systemd/system/ -p wa -k sec598_systemd
+
+    - name: Remove default task audit suppression
+      ansible.builtin.lineinfile:
+        path: /etc/audit/rules.d/audit.rules
+        regexp: '^-a task,never$'
+        state: absent
+
+    - name: Load audit rules
+      ansible.builtin.command:
+        cmd: augenrules --load
+      changed_when: true
+
+    - name: Ensure auditd is enabled
+      ansible.builtin.service:
+        name: auditd
+        enabled: true
+        state: started

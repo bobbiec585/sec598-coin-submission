@@ -1,0 +1,20 @@
+{
+  "scenario": "curl",
+  "provenance": "Selected fields from locally saved validation evidence",
+  "redaction": "Resource identifiers, command arguments and raw logs omitted",
+  "verdicts": {
+    "behaviour_observed": true,
+    "execution_confirmed": true,
+    "telemetry_confirmed": true,
+    "detection_confirmed": false
+  },
+  "selected_event_count": 1,
+  "selected_events": [
+    {
+      "timestamp": "11/07/26 15:47:51.736",
+      "exe": "/usr/bin/curl",
+      "key": "sec598_exec",
+      "ppid": 2412
+    }
+  ]
+}

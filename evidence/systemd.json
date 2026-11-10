@@ -1,0 +1,29 @@
+{
+  "scenario": "systemd",
+  "provenance": "Selected fields from locally saved validation evidence",
+  "redaction": "Resource identifiers, command arguments and raw logs omitted",
+  "verdicts": {
+    "behaviour_observed": true,
+    "execution_confirmed": true,
+    "telemetry_confirmed": true,
+    "detection_confirmed": false
+  },
+  "selected_event_count": 2,
+  "selected_events": [
+    {
+      "event_type": "file_create",
+      "timestamp": "11/07/26 15:48:06.697",
+      "exe": "/usr/bin/bash",
+      "key": "sec598_systemd",
+      "success": "yes",
+      "syscall": "openat",
+      "created_path": "/etc/systemd/system/sec598-coin-[redacted].service"
+    },
+    {
+      "timestamp": "11/07/26 15:48:07.227",
+      "exe": "/usr/bin/touch",
+      "key": "sec598_exec",
+      "ppid": 1
+    }
+  ]
+}

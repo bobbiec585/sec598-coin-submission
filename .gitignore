@@ -1,0 +1,29 @@
+.venv/
+.env
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+__pycache__/
+*.pyc
+telemetry/*.jsonl
+data/runs/
+# Generated validation runs
+data/runs/
+
+# Local telemetry captures and assessments
+telemetry/*.txt
+telemetry/*.json
+
+# Generated test output
+data/tests/
+
+# Terraform-generated plans and variables
+*.tfplan
+*.tfvars
+
+config/ansible/inventory.yml
+# Downloaded third-party reports
+data/reports/*.html
+data/reports/*.txt
+*.before-fix
